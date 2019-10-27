@@ -1,0 +1,14 @@
+/************************************************
+***      Programmer:    Jeff Cate             ***
+***          Course:    Webdev 114            ***
+***         Project:    a1 - Hello World      ***
+***        Due Date:    9/12/19               ***
+************************************************/
+h1 {text-align: center;}
+
+h2 {text-align: center;}
+
+body {  
+    width: 620px;
+    margin: 0 auto;
+}

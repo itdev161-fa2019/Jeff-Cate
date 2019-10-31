@@ -39,6 +39,7 @@ const Register = () => {
 
             const body = JSON.stringify(newUser);
             const res = await axios.post('http://localhost:5000/api/users', body, config);
+            console.log(res.data);
         } catch (error){
             console.error(error.response.data);
             return;

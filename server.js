@@ -85,12 +85,10 @@ app.post(
         }
     }
 );
-
 // Connection listener
 const port = 5000;
 app.listen(port, () => console.log(`Express server running on port ${port}`));
 
-// Authenticate user endpoint
 /**
  * @route GET api/auth
  * @desc Authenticate user
@@ -103,7 +101,7 @@ app.get('/api/auth', auth, async (req,res) => {
         res.status(500).send('Unknown server error');
     }
 });
-// Login user
+
 /**
  * @route POST api/login
  * @desc Login user

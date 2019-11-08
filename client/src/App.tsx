@@ -40,7 +40,7 @@ class App extends React.Component {
           'x-auth-token': token
         }
       }
-      axios.get("http://localhost:500/api/auth", config)
+      axios.get('http://localhost:500/api/auth', config)
         .then((response) => {
           localStorage.setItem('user', response.data.name)
           this.setState({ user: response.data.name })
@@ -49,6 +49,7 @@ class App extends React.Component {
           localStorage.removeItem('user');
           this.setState({ user: null});
           console.error(`Error logging in: ${error}`);
+          console.log("error here")
         })
     }
   }
@@ -64,6 +65,7 @@ logOut = () => {
     const authProps = {
       authenticateUser: this.authenticateUser
     }
+
     return (
       <Router>
       <div className="App">
@@ -81,6 +83,7 @@ logOut = () => {
               <Link to="" onClick={this.logOut}>Log Out</Link> :
               <Link to="/login">Log in</Link>
               }
+
             </li>
           </ul>
         </header>
@@ -97,14 +100,14 @@ logOut = () => {
             }
 
           </Route>
-        <Switch>
+          <Switch>
             <Route 
               exact path="/register" 
               render={() => <Register {...authProps} />} />
             <Route 
               exact path="/login" 
               render={() => <Login {...authProps} />} />
-        </Switch>
+          </Switch>
         </main>
       </div>
       </Router>

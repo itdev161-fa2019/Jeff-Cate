@@ -8,7 +8,7 @@ const Login = ({ authenticateUser }) => {
         email: '',
         password: ''
     });
-    const [errorData, setErrorData] = useState({ errors: null});
+    const [errorData, setErrorData] = useState({ errors: null });
 
     const { email, password} = userData;
     const { errors } = errorData;
@@ -35,7 +35,7 @@ const Login = ({ authenticateUser }) => {
             }
 
             const body = JSON.stringify(newUser);
-            const res = await axios.post('http://localhost:5000/api/login', config);
+            const res = await axios.post('http://localhost:5000/api/login', body, config);
 
             // Store user data and redirect
             localStorage.setItem('token', res.data.token);
@@ -58,31 +58,31 @@ const Login = ({ authenticateUser }) => {
         <div>
             <h2>Log In</h2>
             <div>
-              <input 
-                type="text"
-                placeholder="Email"
-                name="email"
-                value={email}
-                onChange={e => onChange(e)} />
+                <input 
+                    type="text"
+                    placeholder="Email"
+                    name="email"
+                    value={email}
+                    onChange={e => onChange(e)} />
             </div>
             <div>
-              <input 
-                type="text"
-                placeholder="Password"
-                name="password"
-                value={password}
-                onChange={e => onChange(e)} />
+                <input 
+                    type="text"
+                    placeholder="Password"
+                    name="password"
+                    value={password}
+                    onChange={e => onChange(e)} />
             </div>
             <div>
-              <button onClick={() => loginUser()}>Log In</button>
+                <button onClick={() => loginUser()}>Log In</button>
             </div>
             <div>
-              {errors && errors.map(errors => 
-                <div key={error.msg}>{error.msg}</div>)}
+              {errors && errors.map(error => 
+                      <div key={error.msg}>{error.msg}</div>)}
             </div>
         </div>     
     )
-    
+
 }
 
 export default Login;

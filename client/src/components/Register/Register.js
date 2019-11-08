@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import axios from 'axios';
 import { useHistory } from 'react-router-dom';
 
-const Register = () => {
+const Register = ({ authenticateUser }) => {
     let history = useHistory();
     const [userData, setUserData] = useState({
         name: '',
@@ -47,7 +47,7 @@ const Register = () => {
             // Store user data and redirect
             localStorage.setItem('token', res.data.token);
             history.push('/');
-        } catch (error){
+        } catch (error) {
             // Clear user data and set errors
             localStorage.removeItem('token');
 
@@ -97,10 +97,10 @@ const Register = () => {
                     onChange={e => onChange(e)} />
             </div>
             <div>
-                <button onClick={() => register()}>Register</button>
+                <button onClick={() => registerUser()}>Register</button>
             </div>
             <div>
-            {errors && errors.map(errors =>
+            {errors && errors.map(error =>
                 <div key={error.msg}>{error.msg}</div>)} 
             </div>
         </div>

@@ -12,7 +12,7 @@ const Register = ({ authenticateUser }) => {
     });
     const [errorData, setErrorData] = useState({ errors: null });
 
-    const {name, email, password, passwordConfirm } = userData;
+    const { name, email, password, passwordConfirm } = userData;
     const { errors } = errorData;
 
     const onChange = e => {

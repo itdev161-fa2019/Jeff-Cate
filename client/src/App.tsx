@@ -40,7 +40,7 @@ class App extends React.Component {
           'x-auth-token': token
         }
       }
-      axios.get('http://localhost:500/api/auth', config)
+      axios.get('http://localhost:5000/api/auth', config)
         .then((response) => {
           localStorage.setItem('user', response.data.name)
           this.setState({ user: response.data.name })
@@ -49,7 +49,6 @@ class App extends React.Component {
           localStorage.removeItem('user');
           this.setState({ user: null});
           console.error(`Error logging in: ${error}`);
-          console.log("error here")
         })
     }
   }

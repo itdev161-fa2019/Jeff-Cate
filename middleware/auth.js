@@ -16,10 +16,10 @@ const auth = (req, res, next) => {
         req.user = decodedToken.user;
 
         next();
-    } catch (error) {
+    }   catch (error) {
         res
-            .status(401)
-            .json({ message: 'Invalid authentication token. Authorization failed.'});
+          .status(401)
+          .json({ message: 'Invalid authentication token. Authorization failed.' });
     }
 };
 

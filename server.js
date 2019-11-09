@@ -1,7 +1,6 @@
 import express  from 'express';
 import connectDatabase from './config/db';
 import { check, validationResult } from 'express-validator';
-//import { prototype } from 'module';
 import cors from 'cors';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
@@ -22,7 +21,6 @@ app.use(
         orgin: 'http://localhost:3000'
     })
 );
-// Api endpoints
 
 /**
  * @route GET /
@@ -31,7 +29,9 @@ app.use(
 app.get('/', (req, res) =>
     res.send('http get request sent to root api endpoint')
 );
-
+// Connection listener
+const port = 5000;
+app.listen(port, () => console.log(`Express server running on port ${port}`));
 
 /**
  * @route POST api/users
@@ -85,9 +85,6 @@ app.post(
         }
     }
 );
-// Connection listener
-const port = 5000;
-app.listen(port, () => console.log(`Express server running on port ${port}`));
 
 /**
  * @route GET api/auth
@@ -100,7 +97,8 @@ app.get('/api/auth', auth, async (req,res) => {
     } catch (error) {
         res.status(500).send('Unknown server error');
     }
-});
+}
+);
 
 /**
  * @route POST api/login
@@ -115,19 +113,19 @@ app.post(
     async (req, res) => {
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
-            return res.status(422).json({ errors: errors.array() })
+            return res.status(422).json({ errors: errors.array() });
         } else{
-            const {email, password } = req.body;
+            const { email, password } = req.body;
             try {
                 // Check if user exists
-                let user = await User.findOne({ email: email});
+                let user = await User.findOne({ email: email });
                 if (!user) {
                     return res
-                      .status
+                      .status(400)
                       .json({ errors: [{ msg: 'Invalid email or password'}] });
                 }
                 
-                //check password
+                // check password
                 const match = await bcrypt.compare(password, user.password);
                 if (!match) {
                     return res

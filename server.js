@@ -206,7 +206,7 @@ app.post(
 );
 
 /**
- * @route
+ * @route Get api/posts
  * @desc Get posts
  */
 app.get('/api/posts', auth, async (req, res) => {
@@ -214,6 +214,26 @@ app.get('/api/posts', auth, async (req, res) => {
         const posts = await Post.find().sort({ date: -1 });
 
         res.json(posts);
+    } catch (error) {
+        console.error(error);
+        res.status(500).send('Server error');
+    }
+});
+
+/**
+ * @route Get
+ * @desc Get posts
+ */
+app.get('/api/posts/:id', auth, async (req, res) => {
+    try{
+        const post = await Post.findById(req.param.id);
+
+        // Make sure the post was found
+        if(!post) {
+            return res.status(404).json({ msg: 'Post not found' });
+        }
+
+        res.json(post);
     } catch (error) {
         console.error(error);
         res.status(500).send('Server error');

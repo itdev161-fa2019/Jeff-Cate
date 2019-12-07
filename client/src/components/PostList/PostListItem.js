@@ -22,6 +22,7 @@ const PostListItem = props => {
              </div>    
              <div className="postControls">
                 <button onClick={() => deletePost(post)}>Delete</button>
+                <button onClick={() => handleEditPost(post)}>handleEditPost</button>
              </div>   
         </div>
     );

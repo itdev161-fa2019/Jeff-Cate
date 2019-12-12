@@ -83,11 +83,6 @@ class App extends React.Component {
     localStorage.removeItem('user');
     this.setState({ user: null, token: null });
   }
-  logOut = () => {
-    localStorage.removeItem('token');
-    localStorage.removeItem('user');
-    this.setState({ user: null, token: null });
-  }
 
   viewPost = post => {
     console.log(`view ${post.title}`);

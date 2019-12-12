@@ -1,9 +1,9 @@
 import React from 'react';
-import './App.css';
 import axios from 'axios';
 import {BrowserRouter as Router, Switch, Route, Link} from 'react-router-dom';
+import './App.css';
 import Register from './components/Register/Register';
-import Login from './components/Login/Login';
+import Login from './components/Login/Login.js';
 import PostList from './components/PostList/PostList';
 import Post from './components/Post/Post';
 import CreatePost from './components/Post/CreatePost';
@@ -25,7 +25,7 @@ class App extends React.Component {
     const token = localStorage.getItem('token');
 
     if (!token) {
-      localStorage.removeItem('user');
+      localStorage.removeItem('user')
       this.setState({ user: null });
     }
 
@@ -35,9 +35,8 @@ class App extends React.Component {
           'x-auth-token': token
         }
       };
-      axios
-        .get('http://localhost:5000/api/auth', config)
-        .then(response => {
+      axios.get('http://localhost:5000/api/auth', config)
+        .then((response) => {
           localStorage.setItem('user', response.data.name);
           this.setState(
             {
@@ -55,8 +54,8 @@ class App extends React.Component {
           console.error(`Error Logging in: ${error}`);
         });
     }
-  };
 
+  }
   loadData = () => {
     const { token } = this.state;
 
@@ -73,12 +72,17 @@ class App extends React.Component {
             posts: response.data
           });
         })
-        .catch(error => {
+        .catch((error) => {
           console.error(`Error fetching data: ${error}`);
         });
     }
   };
 
+  logOut = () => {
+    localStorage.removeItem('token');
+    localStorage.removeItem('user');
+    this.setState({ user: null, token: null });
+  }
   logOut = () => {
     localStorage.removeItem('token');
     localStorage.removeItem('user');
@@ -91,7 +95,7 @@ class App extends React.Component {
       post: post
     });
   };
-
+            
   deletePost = post => {
     const { token } = this.state;
 
@@ -201,6 +205,7 @@ class App extends React.Component {
                 <CreatePost token={token} onPostCreated={this.onPostCreated} />
               </Route>
 
+
               <Route path="/edit-post/:postId">
                   <EditPost
                   token={token}
@@ -208,7 +213,6 @@ class App extends React.Component {
                   onPostUpdated={this.onPostUpdated}
                   />
               </Route>
-
               <Route
                 exact
                 path="/register"

@@ -48,14 +48,14 @@ class App extends React.Component {
             }
           );
         })
-        .catch((error) => {
+        .catch(error => {
           localStorage.removeItem('user');
           this.setState({ user: null });
           console.error(`Error Logging in: ${error}`);
         });
     }
-  }
 
+  }
   loadData = () => {
     const { token } = this.state;
 
@@ -76,8 +76,13 @@ class App extends React.Component {
           console.error(`Error fetching data: ${error}`);
         });
     }
-  }
+  };
 
+  logOut = () => {
+    localStorage.removeItem('token');
+    localStorage.removeItem('user');
+    this.setState({ user: null, token: null });
+  }
   logOut = () => {
     localStorage.removeItem('token');
     localStorage.removeItem('user');
@@ -90,7 +95,7 @@ class App extends React.Component {
       post: post
     });
   };
-
+            
   deletePost = post => {
     const { token } = this.state;
 
@@ -171,7 +176,6 @@ class App extends React.Component {
                 ) : (
                   <Link to="/login">Login</Link>
                 )}
-                
               </li>
             </ul>
           </header>
@@ -200,6 +204,7 @@ class App extends React.Component {
               <Route path="/new-post">
                 <CreatePost token={token} onPostCreated={this.onPostCreated} />
               </Route>
+
 
               <Route path="/edit-post/:postId">
                   <EditPost
